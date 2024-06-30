@@ -1,6 +1,5 @@
 import app from "./app.js";
 import cloudinary from "cloudinary";
-import express from 'express';
 import userStatusRouter from './router/userStatusRouter.js';
 
 cloudinary.v2.config({
@@ -9,7 +8,13 @@ cloudinary.v2.config({
     api_secret: process.env.CLOUDINARY_API_SECRET
 });
 
-const app = express();
+const port = process.env.PORT || 3000;
+
+app.use('/api/user', userStatusRouter);
+
+app.listen(port, () => {
+    console.log(`Server listening on port ${process.env.PORT}`);
+});
 const port = process.env.PORT || 3000;
 
 app.use('/api/user', userStatusRouter);
