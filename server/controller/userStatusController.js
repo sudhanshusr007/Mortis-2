@@ -1,16 +1,25 @@
-import express from 'express';
+import User from '../models/userSchema.js'; 
 
-// Mock function to get user status
 const getUserStatus = async (req, res) => {
     const userId = req.params.id;
 
-    // Simulate fetching user status from a database or service
-    const userStatus = {
-        userId,
-        status: 'active' // Replace with actual status fetching logic
-    };
+    try {
+        
+        const user = await User.findById(userId);
 
-    res.json(userStatus);
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        const userStatus = {
+            userId: user._id,
+            status: user.status
+        };
+
+        res.json(userStatus);
+    } catch (error) {
+        res.status(500).json({ message: 'Server error', error });
+    }
 };
 
 export { getUserStatus };

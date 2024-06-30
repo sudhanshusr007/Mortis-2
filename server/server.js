@@ -13,16 +13,3 @@ app.use('/api/user', userStatusRouter);
 app.listen(process.env.PORT, () => {
     console.log(`Server listening on port ${process.env.PORT}`);
 });
-app.use('/api/user', userStatusRouter);
-
-app.listen(port, () => {
-    console.log(`Server listening on port ${process.env.PORT}`);
-});
-const port = process.env.PORT || 3000;
-
-app.use('/api/user', userStatusRouter);
-
-app.listen(port, () => {
-    console.log(`Server listening on port ${process.env.PORT}`);
-});
-);
