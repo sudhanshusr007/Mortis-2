@@ -17,7 +17,7 @@ const handleLogin=async(e)=>{
   e.preventDefault()
   try {
     const response=await axios.post("https://mortis-2.onrender.com/api/v1/user/login"
-      ,{email,password,confirmPassword,role:"Patient"},{withCredentials:true,headers:{"Content-Type":"application/json"}})
+      ,{email,password,role:"Patient"},{withCredentials:true,headers:{"Content-Type":"application/json"}})
       toast.success(response.data.message)
       setIsAuthenticated(true)
       navigateTo("/")
