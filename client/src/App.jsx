@@ -12,6 +12,8 @@ import Navbar from "./components/Navbar";
 import { Context } from "./main";
 import Footer from "./components/Footer";
 import Register from './pages/Register'
+import ApplicationStatus from "./pages/ApplicationStatus";
+
 
 const App = () => {
   const{isAuthenticated,setIsAuthenticated,setUser}=useContext(Context);
@@ -38,9 +40,10 @@ const App = () => {
         <Route path='/about' element={<AboutUs/>}/>
         <Route path='/register' element={<Register/>}/>
         <Route path='/login' element={<Login/>}/>
+        <Route path="/application-status" element={<ApplicationStatus />} />
       </Routes>
       <Footer/>
-      <ToastContainer position="top-center"/>
+      <ToastContainer position="top-right"/>
     </Router>
     </>
   )

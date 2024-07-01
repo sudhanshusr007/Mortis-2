@@ -57,17 +57,12 @@ const Dashboard = () => {
             <img src="/doc.png" alt="docImg" />
             <div className="content">
               <div>
-                <p>Hello ,</p>
+                <p>Hello </p>
                 <h5>
                   {admin &&
                     `${admin.firstName} ${admin.lastName}`}{" "}
                 </h5>
               </div>
-              <p>
-                Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                Facilis, nam molestias. Eaque molestiae ipsam commodi neque.
-                Assumenda repellendus necessitatibus itaque.
-              </p>
             </div>
           </div>
           <div className="secondBox">
