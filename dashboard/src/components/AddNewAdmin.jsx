@@ -11,7 +11,6 @@ const AddNewAdmin = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [nic, setNic] = useState("");
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [password, setPassword] = useState("");
@@ -24,7 +23,7 @@ const AddNewAdmin = () => {
       await axios
         .post(
           "http://localhost:4000/api/v1/user/admin/addnew",
-          { firstName, lastName, email, phone, nic, dob, gender, password },
+          { firstName, lastName, email, phone, dob, gender, password },
           {
             withCredentials: true,
             headers: { "Content-Type": "application/json" },
@@ -38,7 +37,6 @@ const AddNewAdmin = () => {
           setLastName("");
           setEmail("");
           setPhone("");
-          setNic("");
           setDob("");
           setGender("");
           setPassword("");
@@ -88,12 +86,6 @@ const AddNewAdmin = () => {
           </div>
           <div>
             <input
-              type="number"
-              placeholder="NIC"
-              value={nic}
-              onChange={(e) => setNic(e.target.value)}
-            />
-            <input
               type={"date"}
               placeholder="Date of Birth"
               value={dob}
@@ -105,6 +97,7 @@ const AddNewAdmin = () => {
               <option value="">Select Gender</option>
               <option value="Male">Male</option>
               <option value="Female">Female</option>
+              <option value="Female">Transgender</option>
             </select>
             <input
               type="password"

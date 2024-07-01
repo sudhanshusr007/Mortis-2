@@ -25,12 +25,6 @@ const userSchema=new mongoose.Schema({
         minLength:[10,"Phone number must contain atleast 10 digits "],
         maxLength:[10,"Phone number must contain atleast 10 digits "]
     },
-    nic:{
-        type:String,
-        required:true,
-        minLength:[5,"NIC must contain exactly 5 digits "],
-        maxLength:[5,"NIC must contain exactly 5 digits "]
-    },
     dob:{
         type:Date,
         required:[true,"DOB is required"]

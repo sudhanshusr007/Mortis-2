@@ -5,32 +5,28 @@ import {generateToken} from "../utils/jwtToken.js"
 import cloudinary from "cloudinary"
 
 export const patientRegister=catchAsyncErrors(async(req,res,next)=>{
-    const {firstName,lastName,email,phone,password,gender,dob,nic,role}=req.body;
-    if(!firstName||!lastName||!email||!phone||!password||!gender||!dob||!nic||!role){
+    const {firstName,lastName,email,phone,password,gender,dob,role}=req.body;
+    if(!firstName||!lastName||!email||!phone||!password||!gender||!dob||!role){
         return next(new ErrorHandler("Please fill full form! ",400));
     }
     let user=await User.findOne({email})
     if(user){
         return next(new ErrorHandler("User already registered! ",400))
     }
-    user=await User.create({firstName,lastName,email,phone,password,gender,dob,nic,role })
+    user=await User.create({firstName,lastName,email,phone,password,gender,dob,role })
     generateToken(user,"User Registered!",200,res)
 })
 
 export const login=catchAsyncErrors(async(req,res,next)=>{
     const{email,password,confirmPassword,role}=req.body;
-    if(!email||!password||!confirmPassword||!role){
+    if(!email||!password||!role){
 return next (new ErrorHandler("Please provide all details! ",400))
     }
-    if (password!==confirmPassword){
-        return next (new ErrorHandler("Passwords do not match! ",400))
+    if (!password){
+        return next (new ErrorHandler("Passwords is wrong! ",400))
     }
     const user=await User.findOne({email}).select("+password");
     if(!user){
-        return next (new ErrorHandler("Invalid email or password! ",400))
-    }
-    const isPasswordMatched=await user.comparePassword(password);
-    if(!isPasswordMatched){
         return next (new ErrorHandler("Invalid email or password! ",400))
     }
     if(role!==user.role){
@@ -40,15 +36,15 @@ return next (new ErrorHandler("Please provide all details! ",400))
 })
 
 export const addNewAdmin=catchAsyncErrors(async(req,res,next)=>{
-    const {firstName,lastName,email,phone,password,gender,dob,nic}=req.body;
-    if(!firstName||!lastName||!email||!phone||!password||!gender||!dob||!nic){
+    const {firstName,lastName,email,phone,password,gender,dob}=req.body;
+    if(!firstName||!lastName||!email||!phone||!password||!gender||!dob){
         return next(new ErrorHandler("Please fill full form! ",400));
     }
     const isRegistered=await User.findOne({email});
         if(isRegistered){
             return next(new ErrorHandler(`${isRegistered.role} with this email already exists!`))
         }
-        const admin=await User.create({firstName,lastName,email,phone,password,gender,dob,nic,role:"Admin"});
+        const admin=await User.create({firstName,lastName,email,phone,password,gender,dob,role:"Admin"});
         res.status(200).json({
             success:true,
             message:"New admin registered!"
@@ -100,8 +96,8 @@ export const addNewDoctor=catchAsyncErrors(async(req,res,next)=>{
     if(!allowedFormats.includes(docAvatar.mimetype)){
         return next(new ErrorHandler("File format not supported!",400))
     }
-    const {firstName,lastName,email,phone,password,gender,dob,nic,doctorDepartment}=req.body;
-    if(!firstName||!lastName||!email||!phone||!password||!gender||!dob||!nic||!doctorDepartment){
+    const {firstName,lastName,email,phone,password,gender,dob,doctorDepartment}=req.body;
+    if(!firstName||!lastName||!email||!phone||!password||!gender||!dob||!doctorDepartment){
 return next (new ErrorHandler("Please provide full details!",400));
     }
     const isRegistered=await User.findOne({email});
@@ -115,7 +111,7 @@ return next (new ErrorHandler("Please provide full details!",400));
             cloudinaryResponse.error||"Unknown Cloudinary Error");
     }
     const doctor=await User.create({
-        firstName,lastName,email,phone,password,gender,dob,nic,doctorDepartment,
+        firstName,lastName,email,phone,password,gender,dob,doctorDepartment,
         role:"Doctor",docAvatar:{
             public_id:cloudinaryResponse.public_id,
             url:cloudinaryResponse.secure_url

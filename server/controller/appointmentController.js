@@ -27,7 +27,7 @@ export const postAppointment = catchAsyncErrors(async (req, res, next) => {
   }
 
   // Extract user details
-  const { firstName, lastName, email, phone, nic, dob, gender } = user;
+  const { firstName, lastName, email, phone, dob, gender } = user;
 
   const {
     appointment_date,
@@ -43,7 +43,6 @@ export const postAppointment = catchAsyncErrors(async (req, res, next) => {
     !lastName ||
     !email ||
     !phone ||
-    !nic ||
     !dob ||
     !gender ||
     !appointment_date ||
@@ -82,7 +81,6 @@ export const postAppointment = catchAsyncErrors(async (req, res, next) => {
     lastName,
     email,
     phone,
-    nic,
     dob,
     gender,
     appointment_date,
@@ -141,6 +139,6 @@ export const deleteAppointment = catchAsyncErrors(async (req, res, next) => {
   await appointment.deleteOne();
   res.status(200).json({
     success: true,
-    message: "Appoitnment Deleted!",
+    message: "Appointment Deleted!",
   });
 });

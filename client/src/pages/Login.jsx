@@ -41,7 +41,6 @@ if(isAuthenticated){
     <form onSubmit={handleLogin}>
       <input type="text" value={email} onChange={(e)=>setEmail(e.target.value)} placeholder="Email"/>
       <input type="password" value={password} onChange={(e)=>setPassword(e.target.value)} placeholder="Password"/>
-      <input type="password" value={confirmPassword} onChange={(e)=>setConfirmPassword(e.target.value)} placeholder="Confirm Password"/>
       <div style={{gap:"10px",justifyContent:"flex-end",flexDirection:"row"}}>
     <p style={{marginBottom:0}}>
       Not registered?  </p>
