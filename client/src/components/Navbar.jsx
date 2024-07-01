@@ -13,7 +13,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const { data } = await axios.get("https://mortis-2.onrender.com/api/v1/user/patient/logout", { withCredentials: true });
+      const { data } = await axios.get(`https://mortis-2.onrender.com/api/v1/user/patient/logout`, { withCredentials: true });
       toast.success(data.message);
       setIsAuthenticated(false);
     } catch (err) {

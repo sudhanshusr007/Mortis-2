@@ -12,7 +12,7 @@ const MessageForm = () => {
   const handleMessage=async(e)=>{
     e.preventDefault();
     try{
-await axios.post("https://mortis-2.onrender.com/api/v1/message/send",
+await axios.post(`https://mortis-2.onrender.com/api/v1/message/send`,
   {firstName,lastName,phone,email,message},
   {
     withCredentials:true,
