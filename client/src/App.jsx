@@ -21,7 +21,7 @@ const App = () => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const response = await axios.get("https://mortis-2.onrender.com/api/v1/user/patient/me", { withCredentials: true });
+        const response = await axios.get(`https://mortis-2.onrender.com/api/v1/user/patient/me`, { withCredentials: true });
         setIsAuthenticated(true);
         setUser(response.data.user);
       } catch (error) {
@@ -30,7 +30,6 @@ const App = () => {
         console.error('Error fetching user:', error); // Log the error for debugging
       }
     };
-
     fetchUser();
   }, [])
   return (
