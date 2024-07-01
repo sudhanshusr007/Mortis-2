@@ -16,20 +16,23 @@ import ApplicationStatus from "./pages/ApplicationStatus";
 
 
 const App = () => {
-  const{isAuthenticated,setIsAuthenticated,setUser}=useContext(Context);
-  useEffect(()=>{
-    const fetchUser=async()=>{
+  const { isAuthenticated, setIsAuthenticated, setUser } = useContext(Context);
+
+  useEffect(() => {
+    const fetchUser = async () => {
       try {
-        const response=await axios.get("https://mortis-2.onrender.com/api/v1/user/patient/me",{withCredentials:true})
-        setIsAuthenticated(true)
-        setUser(response.data.user)
+        const response = await axios.get("https://mortis-2.onrender.com/api/v1/user/patient/me", { withCredentials: true });
+        setIsAuthenticated(true);
+        setUser(response.data.user);
       } catch (error) {
-        setIsAuthenticated(false)
-        setUser({})
+        setIsAuthenticated(false);
+        setUser({});
+        console.error('Error fetching user:', error); // Log the error for debugging
       }
-    }
-    fetchUser()
-  },[isAuthenticated])
+    };
+
+    fetchUser();
+  }, [])
   return (
     <>
     <Router>
