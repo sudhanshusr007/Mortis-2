@@ -18,7 +18,7 @@ const ApplicationStatus = () => {
       setLoading(true);
       try {
         const { data } = await axios.get(
-          `https://mortis-2.onrender.com/api/v1/appointment/patient-history/${patientId}`,
+          'http://localhost:4000/api/v1/appointment/patient-history/${patientId}',
           { withCredentials: true }
         );
         setAppointments(data.appointments);
